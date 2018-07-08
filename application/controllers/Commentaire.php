@@ -8,7 +8,7 @@ class Commentaire extends REST_Controller {
 
     public function index()
     {
-
+    	echo ('Test github');
     }
     public function Commentaire_post(){
         $text=$this->post('texte');
