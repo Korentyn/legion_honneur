@@ -30,10 +30,10 @@ class Preferences extends REST_Controller {
 
 
     public function Preference_get(){
-        $id_signalement=$this->get('id_signalement');
+        $id_user=$this->get('id_user');
 
         $this->load->model('Preferencebdd');
-        $donnees=$this->Commentairebdd->listerPreference($id_signalement);
+        $donnees=$this->Preferencebdd->listerPreference($id_user);
 
         $this->response($donnees,200);
 
