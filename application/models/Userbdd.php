@@ -52,6 +52,15 @@ class Userbdd extends CI_Model {
     }
 
 
+    public function modifierUser($id_user, $nom, $mail) {
+
+        $this->load->database();
+
+        $sql = "UPDATE `user` SET `nom`=?, `mail`=? WHERE id=".$id_user;
+        $query = $this->db->query($sql, array($nom, $mail));
+
+        return $query;
+    }
 
 
 

@@ -59,8 +59,8 @@ class Commentairebdd extends CI_Model
 
         $this->load->database();
 
-        $sql = "UPDATE `commentaire` SET `texte`=? WHERE id= ? and id_user=?";
-        $query = $this->db->query($sql, array($texte, $id, $id_user));
+        $sql = "UPDATE `commentaire` SET `texte`=? WHERE id= ? and id_user=".$id_user;
+        $query = $this->db->query($sql, array($texte, $id));
         return $query;
 
 

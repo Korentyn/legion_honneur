@@ -11,7 +11,24 @@ class User extends REST_Controller {
 	public function user_put()
 	{
 
+        $id_user=$this->put('id_user');
+        $nom=$this->put('nom');
+        $mail=$this->put('mail');
 
+        if ($id_user != "" && $nom != "" && $mail!= "" ){
+            $this->load->model('Userbdd');
+            $this->Userbdd->modifierUser($id_user, $nom, $mail);
+            $donnees_reponse = array("message"=>"Profil modifie, Merci !");
+            $status=201;
+        }else{
+
+            $donnees_reponse = array("message"=>"erreur de modification du profil");
+            $status=408;
+
+
+
+        }
+        $this->response($donnees_reponse,$status);
 
 		
 	}
@@ -67,12 +84,24 @@ class User extends REST_Controller {
 	}
     
     
-    //----------------------------------------------------
-    public function user_delete()
+    
+    public function supuser_get()
 	{
-       //TODO
+        $id=$this->get('id_user');
 
-       
+       if ($id != ""){
+           $this->load->model('Userbdd');
+           $this->Userbdd->supprimerUser($id);
+           $donnees_reponse = array("message"=>"Compte supprime, Merci !");
+           $status=201;
+       }
+    else{
+
+           $donnees_reponse = array("message"=>"erreur de suppression du commentaire");
+           $status=408;
+
+        }
+        $this->response($donnees_reponse,$status);
 	}
     
     
