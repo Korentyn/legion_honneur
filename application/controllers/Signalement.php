@@ -70,7 +70,38 @@ class Signalement extends REST_Controller {
     }
 
 
+    public function signalementPref_get()
+    {
+// Récupère tous les signalements d'un user en fonction de ses préférences
 
+
+        $id_user=$this->get('id_user');
+
+
+        if ($id_user > 0 ){
+            $this->load->model('Preferencebdd');
+            $donnees=$this->Preferencebdd->listerPreference($id_user);
+
+            $rayon = $donnees[0]->rayon;
+            $latitude = $donnees[0]->latitude_favoris;
+            $longitude = $donnees[0]->longitude_favoris;
+
+            if($rayon > 0 && $latitude != "" && $longitude != ""){
+                $this->load->model('Signalementbdd');
+                $donnees_reponse=$this->Signalementbdd->listerSignalementRayon($rayon, $latitude, $longitude);
+                $status=200;
+            }else{
+                $donnees_reponse = array("message"=>"erreur récupération, manque infos préférences");
+                $status=408;
+            }
+
+        }else{
+            $donnees_reponse = array("message"=>"erreur récupération, manque id User");
+            $status=408;
+        }
+
+        $this->response($donnees_reponse,$status);
+    }
 
 
 

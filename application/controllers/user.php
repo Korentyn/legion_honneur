@@ -84,7 +84,7 @@ class User extends REST_Controller {
 	}
     
     
-    
+
     public function supuser_get()
 	{
         $id=$this->get('id_user');

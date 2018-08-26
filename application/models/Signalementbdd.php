@@ -26,29 +26,33 @@ class Signalementbdd extends CI_Model {
     public function listerSignalementTous()
     {
         $this->load->database();
-        $query = $this->db->query('SELECT * FROM `signalement`');
+        $query = $this->db->query('SELECT * FROM `signalement` WHERE visible=1');
         return $query->result_object();
     }
 
 
     public function listerSignalementRayon($rayon, $latitude_ref, $longitude_ref){
+// récupère les signalement avec rayon et emplacement personnalisé
+
             $this->load->database();
 
         $query = $this->db->query("SELECT *,             
     (6366*acos(cos(radians($latitude_ref))*cos(radians(latitude))*cos(radians(longitude) -radians($longitude_ref))+sin(radians($latitude_ref))*sin(radians(latitude)))) AS distance 
-    FROM `signalement` 
+    FROM `signalement` WHERE visible=1
     HAVING distance<=$rayon ORDER by distance ASC");
         return $query->result_object();
         }
-        
+
+
+
 
     public function listerSignalement($id) {
-
+// récupère le signalement qui a pour id '$id'
 
 
         $this->load->database();
 
-        $query = $this->db->query('SELECT * FROM `signalement` WHERE id='.$id);
+        $query = $this->db->query('SELECT * FROM `signalement` WHERE visible=1 AND id='.$id);
 
         return $query->row();
 
@@ -59,7 +63,7 @@ class Signalementbdd extends CI_Model {
     public function supprimerSignalement($id) {
 
         $this->load->database();
-        $sql = "DELETE FROM `signalement` WHERE id=?";
+        $sql = "UPDATE `signalement` SET visible=0 WHERE id=?";
         $query = $this->db->query($sql, array($id));
         //.$this->db->escape($id)
         return $query;

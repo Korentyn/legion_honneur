@@ -44,7 +44,7 @@ class Userbdd extends CI_Model {
 
         $this->load->database();
 
-        $query = $this->db->query('DELETE FROM `user` WHERE id ='.$this->db->escape($id));
+        $query = $this->db->query('UPDATE `user` SET visible=0 WHERE id ='.$this->db->escape($id));
 
         return $query;
 

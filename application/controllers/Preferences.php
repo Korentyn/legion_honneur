@@ -14,7 +14,7 @@ class Preferences extends REST_Controller {
 
         if ($id_user != ""){
             $this->load->model('Preferencebdd');
-            $this->Preferencebdd->creerPreference($rayon=null, $latitude_favoris=null, $longitude_favoris=null, $avatar=null, $id_user);
+            $this->Preferencebdd->creerPreference($rayon, $latitude_favoris, $longitude_favoris, $avatar, $id_user);
             $donnees_reponse = array("message"=>"Preference envoyé, Merci !");
             $status=201;
         }else{
@@ -51,7 +51,7 @@ class Preferences extends REST_Controller {
 
         if ($id_user != "" && $id_user != null){
             $this->load->model('Preferencebdd');
-            $this->Preferencebdd->modifierPreference($rayon=null, $latitude_favoris=null, $longitude_favoris=null, $avatar=null, $id_user);
+            $this->Preferencebdd->modifierPreference($rayon, $latitude_favoris, $longitude_favoris, $avatar, $id_user);
             $donnees_reponse = array("message"=>"Preference modifie, Merci !");
             $status=201;
         }else{
