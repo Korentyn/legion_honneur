@@ -1,0 +1,21 @@
+.nav-btns{
+
+}
+
+.options options_show{
+    justify-content: space-around;
+
+
+}
+
+.container .navigation .plus .plusVer{
+    display : flex;
+}
+
+.container .options {
+    width : 460px;
+}
+
+.container .options_show {
+    left: 20%;
+}
