@@ -3,23 +3,26 @@ date_default_timezone_set('Europe/Paris');
 class Signalementbdd extends CI_Model {
 
 	
-	public function insererSignalement($latitude, $longitude, $date, $id_etat, $id_user, $id_evenement) {
+	public function insererSignalement($latitude, $longitude, $id_user, $id_evenement) {
         $rayon = 0.1; // Rayon = 100 mètres
+        $today_date = date("Y-m-d");
+        $today_heure = date("H:i:s");
         $this->load->database();
         $queryverif = $this->db->query("SELECT *,             
     (6366*acos(cos(radians($latitude))*cos(radians(latitude))*cos(radians(longitude) -radians($longitude))+sin(radians($latitude))*sin(radians(latitude)))) AS distance 
-    FROM `signalement` WHERE id_evenement = $id_evenement
+    FROM `signalement` 
     HAVING distance<=$rayon ");
 
         // Si il existe déjà dans la bdd le même id_evenement dans les 100 mètres, on rentre dans la boucle, sinon on insère dans la bdd
         if(count($queryverif->result_object())>0){
-
+                $erreur = "EAE";
+                return $erreur;
         }else{
-            $query = $this->db->query("INSERT INTO `signalement` (latitude, longitude, date, id_etat, id_user, id_evenement) 
-                VALUES (".$this->db->escape($latitude).", ".$this->db->escape($longitude).", ".$this->db->escape($date)."
-                , ".$this->db->escape($id_etat).", ".$this->db->escape($id_user).", ".$this->db->escape($id_evenement).")");
+            $query = $this->db->query("INSERT INTO `signalement` (latitude, longitude, date, heure, id_user, id_evenement) 
+                VALUES (".$this->db->escape($latitude).", ".$this->db->escape($longitude).", ".$this->db->escape($today_date)."
+                , ".$this->db->escape($today_heure).", ".$this->db->escape($id_user).", ".$this->db->escape($id_evenement).")");
             return $query;
-        }
+    }
 
 	}
     
@@ -65,13 +68,14 @@ class Signalementbdd extends CI_Model {
         $this->load->database();
         $sql = "UPDATE `signalement` SET visible=0 WHERE id=?";
         $query = $this->db->query($sql, array($id));
-        //.$this->db->escape($id)
+
         return $query;
     }
 
     public function upvoteSignalement($id_signalement, $id_user)
     {
-        $today = date("Y-m-d H:i:s");
+        $today_date = date("Y-m-d");
+        $today_heure = date("H:i:s");
         $this->load->database();
         $down = 1;
         $sqlverif = "SELECT * FROM `vote` WHERE id_signalement = ? AND id_user = ?";
@@ -81,11 +85,11 @@ class Signalementbdd extends CI_Model {
             $sqldelete = "DELETE FROM `vote` WHERE id_user = ? AND id_signalement= ?";
             $this->db->query($sqldelete, array($id_user, $id_signalement));
 
-            $sql = "INSERT INTO `vote` (id_user, id_signalement, valeur, date) VALUES (?, ?, ?, ?)";
-            $query = $this->db->query($sql, array($id_user, $id_signalement, $down, $today));
+            $sql = "INSERT INTO `vote` (id_user, id_signalement, valeur, date, heure) VALUES (?, ?, ?, ?, ?)";
+            $query = $this->db->query($sql, array($id_user, $id_signalement, $down, $today_date, $today_heure));
         }else{
-            $sql = "INSERT INTO `vote` (id_user, id_signalement, valeur, date) VALUES (?, ?, ?, ?)";
-            $query = $this->db->query($sql, array($id_user, $id_signalement, $down, $today));
+            $sql = "INSERT INTO `vote` (id_user, id_signalement, valeur, date, heure) VALUES (?, ?, ?, ?, ?)";
+            $query = $this->db->query($sql, array($id_user, $id_signalement, $down, $today_date, $today_heure));
         }
 
 
@@ -96,7 +100,8 @@ class Signalementbdd extends CI_Model {
 
     public function downvoteSignalement($id_signalement, $id_user)
     {
-        $today = date("Y-m-d H:i:s");
+        $today_date = date("Y-m-d");
+        $today_heure = date("H:i:s");
         $this->load->database();
         $up = -1;
         $sqlverif = "SELECT * FROM `vote` WHERE id_signalement = ? AND id_user = ?";
@@ -106,11 +111,11 @@ class Signalementbdd extends CI_Model {
             $sqldelete = "DELETE FROM `vote` WHERE id_user = ? AND id_signalement= ?";
             $this->db->query($sqldelete, array($id_user, $id_signalement));
 
-            $sql = "INSERT INTO `vote` (id_user, id_signalement, valeur, date) VALUES (?, ?, ?, ?)";
-            $query = $this->db->query($sql, array($id_user, $id_signalement, $up, $today));
+            $sql = "INSERT INTO `vote` (id_user, id_signalement, valeur, date, heure) VALUES (?, ?, ?, ?, ?)";
+            $query = $this->db->query($sql, array($id_user, $id_signalement, $up, $today_date, $today_heure));
         }else{
-            $sql = "INSERT INTO `vote` (id_user, id_signalement, valeur, date) VALUES (?, ?, ?, ?)";
-            $query = $this->db->query($sql, array($id_user, $id_signalement, $up, $today));
+            $sql = "INSERT INTO `vote` (id_user, id_signalement, valeur, date, heure) VALUES (?, ?, ?, ?, ?)";
+            $query = $this->db->query($sql, array($id_user, $id_signalement, $up, $today_date, $today_heure));
         }
 
         return $query;

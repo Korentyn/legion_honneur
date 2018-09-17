@@ -14,21 +14,26 @@ class Signalement extends REST_Controller {
     public function signalement_post(){
         $latitude=$this->post('latitude');
         $longitude=$this->post('longitude');
-        $date=$this->post('date');
-        $id_etat=$this->post('id_etat');
-        $id_user=$this->post('id_user');
+        $id_user=1;
         $id_evenement=$this->post('id_evenement');
         //var_dump($latitude , $longitude, $date, $id_etat, $id_user, $id_evenement);
 
-        if ($latitude != "" && $longitude != "" && $date!= "" && $id_etat!="" && $id_user != "" && $id_evenement != ""){
+        if ($latitude != "" && $longitude != "" && $id_user != "" && $id_evenement != ""){
             $this->load->model('Signalementbdd');
-            $this->Signalementbdd->insererSignalement($latitude, $longitude, $date, $id_etat, $id_user, $id_evenement);
-            $donnees_reponse = array("message"=>"Signalement cree, Merci !");
-            $status=201;
+            $reponse = $this->Signalementbdd->insererSignalement($latitude, $longitude, $id_user, $id_evenement);
+
+            if ($reponse != "EAE"){
+                $donnees_reponse = array("message"=>"Signalement cree, Merci !");
+                $status=201;
+            }else{
+                $donnees_reponse = array("message"=>"Signalement existant trop proche !");
+                $status=201;
+            }
+
         }else{
 
             $donnees_reponse = array("message"=>"erreur creation manque des infos");
-            $status=408;
+            $status=418;
 
 
 

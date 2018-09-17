@@ -9,7 +9,7 @@ class Commentairebdd extends CI_Model
 
         $this->load->database();
 
-        $query = $this->db->query('SELECT * FROM `commentaire` WHERE visible =1 ORDER BY date ASC');
+        $query = $this->db->query('SELECT * FROM `commentaire` WHERE visible =1 ORDER BY date, heure ASC');
 
         return $query->result_object();
 
@@ -22,7 +22,7 @@ class Commentairebdd extends CI_Model
 
         $this->load->database();
 
-        $sql = "SELECT * FROM `commentaire` WHERE id_signalement =? AND visible=1 ORDER BY date ASC";
+        $sql = "SELECT * FROM `commentaire` WHERE id_signalement =? AND visible=1 ORDER BY date, heure ASC";
         $query = $this->db->query($sql, array($id_signalement));
         return $query->result_object();
 
@@ -31,12 +31,12 @@ class Commentairebdd extends CI_Model
 
     public function creerCommentaire($text, $id_user, $id_signalement)
     {
-        $today = date("Y-m-d H:i:s");
-
+        $today_date = date("Y-m-d");
+        $today_heure = date("H:i:s");
         $this->load->database();
 
-        $query = $this->db->query("INSERT INTO `commentaire` (`texte`, `date`, `id_user`, `id_signalement`) 
-        VALUES ('$text','$today','$id_user', '$id_signalement')");
+        $query = $this->db->query("INSERT INTO `commentaire` (`texte`, `date`, `heure`, `id_user`, `id_signalement`) 
+        VALUES ('$text','$today_date','$today_heure','$id_user', '$id_signalement')");
 
         return $query;
     }
