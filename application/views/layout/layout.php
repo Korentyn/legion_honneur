@@ -8,7 +8,6 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -22,10 +21,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Carte</a>
+            <a class="nav-item nav-link active" href="<?php echo site_url(''); ?>">Carte</a>
             <a class="nav-item nav-link" href="#">Préférences</a>
             <a class="nav-item nav-link" href="#">Connexion</a>
-            <a class="nav-item nav-link" href="#">Création compte</a>
+            <a class="nav-item nav-link" href="<?php echo site_url('Inscription/index'); ?>">Création compte</a>
         </div>
     </div>
 </nav>

@@ -35,7 +35,7 @@ $config['base_url'] = 'http://localhost/ISTEF/Waze/Waze-app/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

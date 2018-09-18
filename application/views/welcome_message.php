@@ -24,10 +24,7 @@
 
     <div class="navigation">
         <div class="nav_btns">
-            <i class=" icon-home" aria-hidden="true"></i>
-            <i class="nav_btn icon-magnifier" aria-hidden="true"></i>
-            <i class="nav_btn_r icon-bell" aria-hidden="true"></i>
-            <i class="nav_btn icon-user" aria-hidden="true"></i>
+
         </div>
         <div id="plusButton" class="plus">
             <div class="plusHor"></div>
