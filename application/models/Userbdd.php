@@ -8,56 +8,34 @@ class Userbdd extends CI_Model {
 
         $this->load->database();
 
-        $query = $this->db->query('SELECT * FROM `user`');
+        $query = $this->db->query('SELECT * FROM `name`');
 
         return $query->result_object();
 
 
     }
 
-    public function listerUser($id) {
 
 
-
-        $this->load->database();
-
-        $query = $this->db->query('SELECT * FROM `user` WHERE id='.$id);
-
-        return $query->row();
-
-
-    }
-
-    public function creerUser($nom, $mail, $xp=null)
+    public function creerUser($nom, $prenom, $note)
     {
         $this->load->database();
 
-        $query = $this->db->query("INSERT INTO `user` (`nom`, `mail`, `xp`) 
-        VALUES ('$nom','$mail','$xp')");
+        $query = $this->db->query("INSERT INTO `name` (`nom`, `prenom`, `note`) 
+        VALUES ('$nom','$prenom','$note')");
 
         return $query;
     }
 
 
 
-    public function supprimerUser($id) {
+
+    public function modifierUser($id_user, $nom, $prenom, $note) {
 
         $this->load->database();
 
-        $query = $this->db->query('UPDATE `user` SET visible=0 WHERE id ='.$this->db->escape($id));
-
-        return $query;
-
-
-    }
-
-
-    public function modifierUser($id_user, $nom, $mail) {
-
-        $this->load->database();
-
-        $sql = "UPDATE `user` SET `nom`=?, `mail`=? WHERE id=".$id_user;
-        $query = $this->db->query($sql, array($nom, $mail));
+        $sql = "UPDATE `name` SET `nom`=?, `prenom`=?, `note`=? WHERE id=".$id_user;
+        $query = $this->db->query($sql, array($nom, $prenom, $note));
 
         return $query;
     }

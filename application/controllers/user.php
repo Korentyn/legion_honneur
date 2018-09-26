@@ -40,16 +40,13 @@ class User extends REST_Controller {
 // je récupère des data dans l'url (params) de la requete HTTP
         $id=$this->get('id');
 
-        if ($id > 0){
-            $this->load->model('Userbdd');
-            $donnees=$this->Userbdd->listerUser($id);
-        }else{
+
 
             $this->load->model('Userbdd');
             $donnees=$this->Userbdd->listerUserTous();
 
 
-        }
+
         $this->response($donnees,200);
 
 
@@ -62,14 +59,14 @@ class User extends REST_Controller {
 
         // je récupère des data dans le body de la requete HTTP
         $nom=$this->post('nom');
-        $mail=$this->post('mail');
+        $prenom=$this->post('prenom');
+        $note=$this->post('note');
 
-
-        if ($nom!="" && $mail!="") {
+        if ($nom!="" && $prenom!="") {
             $this->load->model('Userbdd');
-            $this->Userbdd->creerUser($nom,$mail);
+            $this->Userbdd->creerUser($nom,$prenom, $note);
 
-            $donnees_reponse = array("message"=>"creation ".$nom." et ".$mail." ok !");
+            $donnees_reponse = array("message"=>"creation ".$nom." et ".$prenom." ok !");
             $status=201;
         } else {
             $donnees_reponse = array("message"=>"erreur creation manque prenom");
