@@ -10,7 +10,7 @@ $opts = array(
 $context = stream_context_create($opts);
 
 // Open the file using the HTTP headers set above
-$file = file_get_contents('http://localhost/Bizness/legion_honneur/MyTab/index.php/Inscription/user', false, $context);
+$file = file_get_contents('http://localhost/Bizness/legion_honneur/MyTab/index.php/User/user', false, $context);
 $json = json_decode($file);
 
 //var_dump($json);

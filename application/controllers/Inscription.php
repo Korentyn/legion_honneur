@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require (APPPATH.'/libraries/REST_Controller.php');
 
-class Inscription extends REST_Controller {
+class Inscription extends CI_Controller {
 
     /**
      * Index Page for this controller.

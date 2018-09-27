@@ -25,7 +25,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="<?php echo site_url('MyTab'); ?>">Tableau</a>
-            <a class="nav-item nav-link" href="<?php echo site_url('Inscription/index'); ?>">Création compte</a>
+            <a class="nav-item nav-link" href="<?php echo site_url('MyTab/index.php/Inscription'); ?>">Création compte</a>
         </div>
     </div>
 </nav>
