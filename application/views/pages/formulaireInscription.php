@@ -14,10 +14,7 @@
     <meta name="Description" content="" />
     <meta name="Keywords" content="Inscription" />
     <meta name="Subject" content="" />
-    <meta name="Content-Type" content="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="style.css" />
     <title>Neo-web.fr</title>
 </head>
 
@@ -30,66 +27,76 @@
             <h1> Inscription <br/> <small> Merci de renseigner vos informations </small></h1>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-offset-2 col-md-3">
             <div class="form-group">
                 <label for="Nom">Nom</label>
-                <input type="text" class="form-control" id="nom" placeholder="Nom">
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
             </div>
         </div>
         <div class="col-md-offset-1 col-md-3">
             <div class="form-group">
                 <label for="Prenom">Prénom</label>
-                <input type="text" class="form-control" id="prenom" placeholder="Prénom">
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-offset-2 col-md-7">
-            <div class="form-group">
-                <label for="Email">Email address</label>
-                <input type="text" class="form-control" id="email" placeholder="Enter email">
-            </div>
-        </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Note</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" name="note" rows="3"></textarea>
     </div>
-
-    <div class="row">
-        <div class="col-md-offset-2 col-md-3">
-            <div class="form-group">
-                <label for="Password">Mot de passe</label>
-                <input type="password" class="form-control" id="password" placeholder="Mot de passe">
-            </div>
-        </div>
-        <div class="col-md-offset-1 col-md-3">
-            <div class="form-group">
-                <label for="Vpassword">Vérification mot de passe</label>
-                <input type="password" class="form-control" id="vpassword" placeholder="Vérification mot de passe">
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-offset-2 col-md-3">
-            <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-earphone"></span>
-                <input type="text" class="form-control" placeholder="Téléphone" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group">
-                <span class="input-group-addon glyphicon glyphicon-globe"></span>
-                <input type="text" class="form-control" placeholder="Adresse" aria-describedby="basic-addon1">
-            </div>
-        </div>
-    </div>
-
     <br/>
     <div class="row">
-        <div class="col-md-offset-5 col-md-1">
-            <button type="button" class="btn btn-primary">Envoyer mes informations</button>
+        <div class="col-md-offset-5 col-sm-1">
+            <button type="submit" id="sign" class="btn btn-primary">Envoyer mes informations</button>
         </div>
     </div>
 
 </div>
+
+<script>
+
+    $(document).ready ( function(){
+
+        $('#sign').click(function() {
+            var $nom = $("#nom").val();
+            var $prenom = $("#prenom").val();
+            var $note = $("#note").val();
+            //alert("Vous avez tapé : " + $nom );
+
+            poster_event($nom, $prenom, $note);
+        });
+
+    });
+
+    function poster_event(nom, prenom, note) {
+
+
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: 'http://localhost/Bizness/legion_honneur/MyTab/index.php/User/user',
+                header: "Accept : application/json",
+                data: {
+                    nom: nom,
+                    prenom: prenom,
+                    note: note,
+
+                },
+                datatype: 'json', // ou json .. ou etc.  = le type de données que l'on attend en retour, si le retour est différent il lance callback erreur, si c'est ok il parse direvtement le JSON
+                success: function(data) {
+                    console.log(data);
+
+
+
+                },
+                error: function(errorThrown) {
+                    // Une erreur s'est produite lors de la requete
+                    console.log(errorThrown);
+                }
+            });
+    }
+</script>
 </body>
 </html>

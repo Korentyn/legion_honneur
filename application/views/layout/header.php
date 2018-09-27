@@ -24,11 +24,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="<?php echo site_url('MyTab'); ?>">Tableau</a>
-            <a class="nav-item nav-link" href="<?php echo site_url('MyTab/index.php/Inscription'); ?>">Création compte</a>
+            <a class="nav-item nav-link active" href="<?php echo base_url(''); ?>">Tableau</a>
+            <a class="nav-item nav-link" href="<?php echo base_url('Inscription'); ?>">Création compte</a>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Success</button>
         </div>
     </div>
 </nav>
 <!--////////// LIBRAIRIES BOOTSTRAP 4.1 ////////////////-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -24,7 +24,8 @@
             <a class="nav-item nav-link active" href="<?php echo site_url(''); ?>">Carte</a>
             <a class="nav-item nav-link" href="#">Préférences</a>
             <a class="nav-item nav-link" href="#">Connexion</a>
-            <a class="nav-item nav-link" href="<?php echo site_url('Inscription/index'); ?>">Création compte</a>
+            <a class="nav-item nav-link" href="<?php echo site_url('Inscription/index'); ?>">Page création</a>
+            <button type="button" class="btn btn-success">Success</button>
         </div>
     </div>
 </nav>
