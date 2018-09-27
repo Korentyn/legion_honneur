@@ -10,10 +10,11 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8>
-    <meta name="Content-Language" content="fr" />
-    <meta name="Description" content="" />
-    <meta name="Keywords" content="Inscription" />
-    <meta name="Subject" content="" />
+    <meta name=" Content-Language
+    " content="fr" />
+    <meta name="Description" content=""/>
+    <meta name="Keywords" content="Inscription"/>
+    <meta name="Subject" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Neo-web.fr</title>
 </head>
@@ -24,20 +25,22 @@
 
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
-            <h1> Inscription <br/> <small> Merci de renseigner vos informations </small></h1>
+            <h1> Inscription <br/>
+                <small> Merci de renseigner vos informations</small>
+            </h1>
         </div>
     </div>
     <div class="row">
         <div class="col-md-offset-2 col-md-3">
             <div class="form-group">
                 <label for="Nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="">
             </div>
         </div>
         <div class="col-md-offset-1 col-md-3">
             <div class="form-group">
                 <label for="Prenom">Prénom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="">
             </div>
         </div>
     </div>
@@ -56,9 +59,10 @@
 
 <script>
 
-    $(document).ready ( function(){
+    $(document).ready(function () {
 
-        $('#sign').click(function() {
+
+        $('#sign').click(function () {
             var $nom = $("#nom").val();
             var $prenom = $("#prenom").val();
             var $note = $("#note").val();
@@ -70,7 +74,6 @@
     });
 
     function poster_event(nom, prenom, note) {
-
 
 
         $.ajax(
@@ -85,13 +88,12 @@
 
                 },
                 datatype: 'json', // ou json .. ou etc.  = le type de données que l'on attend en retour, si le retour est différent il lance callback erreur, si c'est ok il parse direvtement le JSON
-                success: function(data) {
+                success: function (data) {
                     console.log(data);
 
 
-
                 },
-                error: function(errorThrown) {
+                error: function (errorThrown) {
                     // Une erreur s'est produite lors de la requete
                     console.log(errorThrown);
                 }
