@@ -26,8 +26,8 @@ $json = json_decode($file);
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-colvis-1.5.2/b-html5-1.5.2/datatables.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../asset/css/maTable.css">
-    <link rel="stylesheet" type="text/css" href="../asset/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/maTable.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/menu.css">
 </head>
 <body>
 
@@ -38,12 +38,12 @@ $json = json_decode($file);
                 <div class="row">
 
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate" required>
+                        <input id="last_name" type="text" class="validate">
                         <label for="last_name">Prénom</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="name" type="text" class="validate" required>
-                        <label for="last_name">Nom</label>
+                        <input id="name" type="text" class="validate">
+                        <label for="name">Nom</label>
                     </div>
                 </div>
 
@@ -63,57 +63,10 @@ $json = json_decode($file);
     </div>
 
         <div class="flex">
-            <a href="#" id="sign" class="modal-close bttn">Enregistrer</a>
+            <a href="#" id="sign" class="bttn">Enregistrer</a>
         </div>
 
 </div>
-
-<!----------------    MODAL ------------------>
-
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h2 class="modal-title" id="exampleModalLabel">Inscription</h2>-->
-<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                    <span aria-hidden="true">&times;</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!---->
-<!--                <div class="container">-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-offset-6 col-md-6">-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="Nom">Nom</label>-->
-<!--                                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-offset-6 col-md-6">-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="Prenom">Prénom</label>-->
-<!--                                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="exampleFormControlTextarea1">Note</label>-->
-<!--                        <textarea class="form-control" id="exampleFormControlTextarea1" name="note" rows="3"></textarea>-->
-<!--                    </div>-->
-<!---->
-<!---->
-<!--                </div>-->
-<!---->
-<!--            </div>-->
-<!--            <div class="modal-footer">-->
-<!--                <div class="">-->
-<!--                    <button type="submit" id="sign" class="btn btn-primary">Envoyer mes informations</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!---------------------------------------------->
 
 <div class="wrapper">
     <table id="myTable" class="display">
@@ -146,31 +99,38 @@ $json = json_decode($file);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 <script>
-    function OpenModal() { // click a button
-        $('#modalInscription').modal(); // Ok
-    }
+
 
     $(document).ready(function () {
+        elem = $('#modalInscription').modal();
+        $instance = M.Modal.getInstance(elem);
+
         $('#myTable').DataTable({
             responsive: true,
         });
 
-        OpenModal();
+        $('.sidenav').sidenav();
+
         $('input#input_text, textarea#textarea2').characterCounter();
 
-        $('#sign').click(function () {
+        $('#sign').click(function ()
+        {
+
             var $nom = $("#name").val();
             var $prenom = $("#last_name").val();
-            var $note = $("#note").val();
-            //alert("Vous avez tapé : " + $nom );
+            var $note = $("#textarea2").val();
+            console.log("Vous avez tapé : " + $note );
 
             poster_event($nom, $prenom, $note);
-            window.location.reload();
+
         });
+
+
+
     });
 
     function poster_event(nom, prenom, note) {
-
+            console.log(nom);
 
         $.ajax(
             {
@@ -186,12 +146,16 @@ $json = json_decode($file);
                 datatype: 'json', // ou json .. ou etc.  = le type de données que l'on attend en retour, si le retour est différent il lance callback erreur, si c'est ok il parse direvtement le JSON
                 success: function (data) {
                     console.log(data);
+                    window.location.reload();
 
+                    $instance.close();
 
                 },
                 error: function (errorThrown) {
                     // Une erreur s'est produite lors de la requete
                     console.log(errorThrown);
+
+                    $instance.close();
                 }
             });
     }
