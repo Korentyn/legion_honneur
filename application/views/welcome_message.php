@@ -27,6 +27,7 @@ $json = json_decode($file);
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.2/b-colvis-1.5.2/b-html5-1.5.2/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="../asset/css/maTable.css">
+    <link rel="stylesheet" type="text/css" href="../asset/css/menu.css">
 </head>
 <body>
 
@@ -41,7 +42,7 @@ $json = json_decode($file);
                         <label for="last_name">Prénom</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate" required>
+                        <input id="name" type="text" class="validate" required>
                         <label for="last_name">Nom</label>
                     </div>
                 </div>
@@ -60,9 +61,11 @@ $json = json_decode($file);
         </div>
 
     </div>
-    <div class="modal-footer">
-        <a href="#!" class="waves-effect waves-green btn-flat">Agree</a>
-    </div>
+
+        <div class="flex">
+            <a href="#" id="sign" class="modal-close bttn">Enregistrer</a>
+        </div>
+
 </div>
 
 <!----------------    MODAL ------------------>
@@ -156,12 +159,13 @@ $json = json_decode($file);
         $('input#input_text, textarea#textarea2').characterCounter();
 
         $('#sign').click(function () {
-            var $nom = $("#nom").val();
-            var $prenom = $("#prenom").val();
+            var $nom = $("#name").val();
+            var $prenom = $("#last_name").val();
             var $note = $("#note").val();
             //alert("Vous avez tapé : " + $nom );
 
             poster_event($nom, $prenom, $note);
+            window.location.reload();
         });
     });
 
