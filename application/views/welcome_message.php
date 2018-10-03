@@ -68,6 +68,54 @@ $json = json_decode($file);
 
 </div>
 
+<div id="modalConnexion" class="modal">
+    <div class="modal-content">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+
+                    <div class="input-field col s6">
+                        <input id="login1" type="text" class="validate">
+                        <label for="login1">Login</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="password1" type="password" class="validate">
+                        <label for="password1">Password</label>
+                    </div>
+                </div>
+
+                <a id="connexion" class="waves-effect waves-light btn">Valider</a>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+    <div id="modalCreation" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+
+                        <div class="input-field col s6">
+                            <input id="login2" type="text" class="validate">
+                            <label for="login2">Prénom</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="password2" type="password" class="validate">
+                            <label for="password2">Password</label>
+                        </div>
+                    </div>
+
+                    <a id="creation" class="waves-effect waves-light btn">Valider</a>
+
+                </form>
+            </div>
+
+        </div>
+
+</div>
+
 <div class="wrapper">
     <table id="myTable" class="display">
         <thead>
@@ -102,14 +150,21 @@ $json = json_decode($file);
 
 
     $(document).ready(function () {
-        elem = $('#modalInscription').modal();
-        $instance = M.Modal.getInstance(elem);
+        elemInscription = $('#modalInscription').modal();
+        $instanceInscription = M.Modal.getInstance(elemInscription);
+
+        elemCreation = $('#modalCreation').modal();
+        $instanceCreation = M.Modal.getInstance(elemCreation);
+
+        elemConnexion = $('#modalConnexion').modal();
+        $instanceConnexion = M.Modal.getInstance(elemConnexion);
 
         $('#myTable').DataTable({
             responsive: true,
             "paging":   false
         });
 
+        //Initialisation navbar gauche responsive
         $('.sidenav').sidenav();
 
         $('input#input_text, textarea#textarea2').characterCounter();
@@ -126,9 +181,87 @@ $json = json_decode($file);
 
         });
 
+        $('#creation').click(function ()
+        {
 
+            var $login = $("#login2").val();
+            var $password = $("#password2").val();
+
+
+
+            poster_event($login, $password);
+
+        });
+
+        $('#connexion').click(function ()
+        {
+
+            var $login = $("#login1").val();
+            var $password = $("#password1").val();
+
+
+
+            poster_event($login, $password);
+
+        });
 
     });
+
+    function creation_event(login, password) {
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: 'http://localhost/Bizness/legion_honneur/MyTab/index.php/Login/login',
+                header: "Accept : application/json",
+                data: {
+                    login: login,
+                    password: password,
+
+                },
+                datatype: 'json', // ou json .. ou etc.  = le type de données que l'on attend en retour, si le retour est différent il lance callback erreur, si c'est ok il parse direvtement le JSON
+                success: function (data) {
+                    console.log(data);
+                    window.location.reload();
+
+                    $instanceCreation.close();
+
+                },
+                error: function (errorThrown) {
+                    // Une erreur s'est produite lors de la requete
+                    console.log(errorThrown);
+
+                    $instanceCreation.close();
+                }
+            });
+    }
+
+
+    function connexion_event(login, password) {
+
+        $.ajax(
+            {
+                type: 'GET',
+                url: 'http://localhost/Bizness/legion_honneur/MyTab/index.php/Login/login',
+                header: "Accept : application/json",
+                data: {
+                    login: login,
+                    password: password,
+                },
+                datatype: 'json', // ou json .. ou etc.  = le type de données que l'on attend en retour, si le retour est différent il lance callback erreur, si c'est ok il parse direvtement le JSON
+                success: function (data) {
+
+                    $instanceConnexion.close();
+                    alert("coucou");
+                    console.log(data);
+                },
+                error: function (errorThrown) {
+                    // Une erreur s'est produite lors de la requete
+                    console.log(errorThrown);
+                    $instanceConnexion.close();
+                }
+            });
+    }
 
     function poster_event(nom, prenom, note) {
             console.log(nom);
@@ -149,14 +282,14 @@ $json = json_decode($file);
                     console.log(data);
                     window.location.reload();
 
-                    $instance.close();
+                    $instanceInscription.close();
 
                 },
                 error: function (errorThrown) {
                     // Une erreur s'est produite lors de la requete
                     console.log(errorThrown);
 
-                    $instance.close();
+                    $instanceInscription.close();
                 }
             });
     }

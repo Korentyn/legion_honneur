@@ -15,8 +15,8 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-<!--            <li><a href="--><?php //echo base_url(''); ?><!--">Tableau</a></li>-->
-<!--            <li><a href="--><?php //echo base_url('Inscription'); ?><!--">Création compte</a></li>-->
+            <li><a class="waves-effect waves-light btn modal-trigger" href="#modalConnexion">Connexion</a></li>
+            <li><a class="modal-trigger" href="#modalCreation">Création compte</a></li>
 
 
             <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal modal-trigger" href="#modalInscription" >
@@ -26,8 +26,8 @@
     </div>
 </nav>
 <ul class="sidenav" id="mobile-demo">
-<!--    <li><a href="--><?php //echo base_url(''); ?><!--">Tableau</a></li>-->
-<!--    <li><a href="--><?php //echo base_url('Inscription'); ?><!--">Création compte</a></li> -->
+    <li><a class="waves-effect waves-light btn modal-trigger" href="#modalConnexion">Connexion</a></li>
+    <li><a class="modal-trigger" href="#modalCreation">Création compte</a></li>
     <li><a class="waves-effect waves-light btn modal-trigger" href="#modalInscription">Ajouter</a></li>
 </ul>
 

@@ -5,21 +5,21 @@ require(APPPATH . '/libraries/REST_Controller.php');
 
 //CLASS GESTION DES ENREGISTREMENTS TABLEAU
 
-class User extends REST_Controller
+class Login extends REST_Controller
 {
 
 
     //----------------------------------------------------
-    public function user_put()
+    public function login_put()
     {
 
         $id_user = $this->put('id_user');
-        $nom = $this->put('nom');
-        $mail = $this->put('mail');
+        $login = $this->put('login');
+        $password = $this->put('password');
 
-        if ($id_user != "" && $nom != "" && $mail != "") {
-            $this->load->model('Userbdd');
-            $this->Userbdd->modifierUser($id_user, $nom, $mail);
+        if ($id_user != "" && $login != "" && $password != "") {
+            $this->load->model('Loginbdd');
+            $this->Loginbdd->modifierLogin($id_user, $login, $password);
             $donnees_reponse = array("message" => "Profil modifie, Merci !");
             $status = 201;
         } else {
@@ -36,14 +36,14 @@ class User extends REST_Controller
 
 
     //----------------------------------------------------
-    public function user_get()
+    public function login_get()
     {
 // je récupère des data dans l'url (params) de la requete HTTP
-        $id = $this->get('id');
+        $login = $this->get('login');
+        $password = $this->get('password');
 
-
-        $this->load->model('Userbdd');
-        $donnees = $this->Userbdd->listerUserTous();
+        $this->load->model('Loginbdd');
+        $donnees = $this->Loginbdd->recupererLogin($login, $password);
 
 
         $this->response($donnees, 200);
@@ -53,22 +53,21 @@ class User extends REST_Controller
 
 
     //----------------------------------------------------
-    public function user_post()
+    public function login_post()
     {
 
         // je récupère des data dans le body de la requete HTTP
-        $nom = $this->post('nom');
-        $prenom = $this->post('prenom');
-        $note = $this->post('note');
+        $login = $this->post('login');
+        $password = $this->post('password');
 
-        if ($nom != "" && $prenom != "") {
-            $this->load->model('Userbdd');
-            $this->Userbdd->creerUser($nom, $prenom, $note);
+        if ($login != "" && $password != "") {
+            $this->load->model('Loginbdd');
+            $this->Loginbdd->creerLogin($login, $password);
 
-            $donnees_reponse = array("message" => "creation " . $nom . " et " . $prenom . " ok !");
+            $donnees_reponse = array("message" => "creation " . $login . " ok !");
             $status = 201;
         } else {
-            $donnees_reponse = array("message" => "erreur creation manque prenom");
+            $donnees_reponse = array("message" => "erreur creation utilisateur");
             $status = 408;
         }
 
@@ -78,13 +77,13 @@ class User extends REST_Controller
     }
 
 
-    public function supuser_get()
+    public function suplogin_get()
     {
         $id = $this->get('id_user');
 
         if ($id != "") {
-            $this->load->model('Userbdd');
-            $this->Userbdd->supprimerUser($id);
+            $this->load->model('Loginbdd');
+            $this->Loginbdd->supprimerUser($id);
             $donnees_reponse = array("message" => "Compte supprime, Merci !");
             $status = 201;
         } else {
