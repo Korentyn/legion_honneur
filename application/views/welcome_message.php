@@ -107,6 +107,7 @@ $json = json_decode($file);
 
         $('#myTable').DataTable({
             responsive: true,
+            "paging":   false
         });
 
         $('.sidenav').sidenav();
