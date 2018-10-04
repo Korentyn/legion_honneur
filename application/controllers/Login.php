@@ -45,7 +45,7 @@ class Login extends REST_Controller
         $this->load->model('Loginbdd');
         $donnees = $this->Loginbdd->recupererLogin($login, $password);
 
-
+echo($donnees);
         $this->response($donnees, 200);
 
 

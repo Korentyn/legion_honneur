@@ -11,6 +11,8 @@ class Loginbdd extends CI_Model {
 
         $sql = "SELECT * FROM `users` WHERE login=? AND password=?";
         $query = $this->db->query($sql, array($login, $password));
+
+
         return $query->result_object();
 
 

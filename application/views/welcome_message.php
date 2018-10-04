@@ -189,7 +189,7 @@ $json = json_decode($file);
 
 
 
-            poster_event($login, $password);
+            creation_event($login, $password);
 
         });
 
@@ -200,8 +200,7 @@ $json = json_decode($file);
             var $password = $("#password1").val();
 
 
-
-            poster_event($login, $password);
+            connexion_event($login, $password);
 
         });
 
@@ -252,8 +251,8 @@ $json = json_decode($file);
                 success: function (data) {
 
                     $instanceConnexion.close();
-                    alert("coucou");
-                    console.log(data);
+
+                    console.log(data[0]['login']);
                 },
                 error: function (errorThrown) {
                     // Une erreur s'est produite lors de la requete
