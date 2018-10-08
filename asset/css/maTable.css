@@ -8,8 +8,17 @@ body{
     width: 80%;
 }
 
-.myFormInscription{
-    width : 60%;
-    height: 80%;
+#myForm-wrapper{
+    display: flex;
+}
 
+#myFormInscription{
+    width : 60vh;
+    height: 80vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#register{
+    height: 30vh;
 }

@@ -34,8 +34,8 @@
 
 
 
-<div class="row">
-    <form class="myFormInscription col s12">
+<div id="myForm-wrapper" class="row">
+    <form id="myFormInscription" class="col s12">
         <div class="row">
             <div class="input-field col s6">
                 <input id="pseudo" type="text" class="validate">
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="flex">
+            <div id="register" class="flex">
                 <a href="#" id="sign" class="bttn">Enregistrer</a>
             </div>
         </div>
