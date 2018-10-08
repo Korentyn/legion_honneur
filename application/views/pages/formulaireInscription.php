@@ -9,54 +9,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8>
-    <meta name=" Content-Language
-    " content="fr" />
-    <meta name="Description" content=""/>
-    <meta name="Keywords" content="Inscription"/>
-    <meta name="Subject" content=""/>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Neo-web.fr</title>
+    <title>Inscription</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/menu.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/maTable.css'); ?>">
 </head>
-
-<body class="my_background">
-
-<div class="container">
-
-    <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-            <h1> Inscription <br/>
-                <small> Merci de renseigner vos informations</small>
-            </h1>
-        </div>
+<body>
+<nav>
+    <div class="nav-wrapper grey darken-4">
+        <a href="<?php echo site_url(''); ?>" class="brand-logo center">Legion d'honneur</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a class="waves-effect waves-light btn modal-trigger" href="#modalConnexion">Connexion</a></li>
+        </ul>
     </div>
-    <div class="row">
-        <div class="col-md-offset-2 col-md-3">
-            <div class="form-group">
-                <label for="Nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" placeholder="">
+</nav>
+<ul class="sidenav" id="mobile-demo">
+    <li><a class="waves-effect waves-light btn modal-trigger" href="#modalConnexion">Connexion</a></li>
+</ul>
+
+
+
+
+<div class="row">
+    <form class="myFormInscription col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="pseudo" type="text" class="validate">
+                <label for="pseudo">Pseudo</label>
             </div>
         </div>
-        <div class="col-md-offset-1 col-md-3">
-            <div class="form-group">
-                <label for="Prenom">Prénom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="">
+        <div class="row">
+            <div class="input-field col s6">
+                <input id="password1" type="password" class="validate">
+                <label for="password1">Mot de passe</label>
+            </div>
+            <div class="input-field col s6">
+                <input id="password2" type="password" class="validate">
+                <label for="password2">Vérification mot de passe</label>
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Note</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" name="note" rows="3"></textarea>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-md-offset-5 col-sm-1">
-            <button type="submit" id="sign" class="btn btn-primary">Envoyer mes informations</button>
+        <div class="row">
+            <div class="flex">
+                <a href="#" id="sign" class="bttn">Enregistrer</a>
+            </div>
         </div>
-    </div>
-
+    </form>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 <script>
 
     $(document).ready(function () {
@@ -74,7 +81,6 @@
     });
 
     function poster_event(nom, prenom, note) {
-
 
         $.ajax(
             {
