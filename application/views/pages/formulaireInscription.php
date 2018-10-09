@@ -48,8 +48,9 @@
                 <label for="password1">Mot de passe</label>
             </div>
             <div class="input-field col s6">
-                <input id="password2" type="password" class="validate">
+                <input id="password2" type="password" class="validate" oninput="verifPassword()">
                 <label for="password2">Vérification mot de passe</label>
+                <span class="helper-text" data-error="wrong" data-success="right">On dirait que tu ne sais pas recopier un mot de passe</span>
             </div>
         </div>
         <div class="row">
@@ -69,16 +70,27 @@
     $(document).ready(function () {
 
 
+
         $('#sign').click(function () {
-            var $nom = $("#nom").val();
-            var $prenom = $("#prenom").val();
-            var $note = $("#note").val();
+            var $nom = $("#pseudo").val();
+            var $prenom = $("#password1").val();
+
             //alert("Vous avez tapé : " + $nom );
 
             poster_event($nom, $prenom, $note);
         });
 
     });
+
+    function verifPassword() {
+        var $pass1 = $("#password1").val();
+        var $pass2 = $("#password2").val();
+
+        if ($pass1 !== $pass2){
+
+        }
+    }
+
 
     function poster_event(nom, prenom, note) {
 

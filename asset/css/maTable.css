@@ -20,5 +20,9 @@ body{
 }
 
 #register{
-    height: 30vh;
+    min-height: 30vh;
+}
+
+.helper-text{
+    color: #bc121e;
 }
