@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/menu.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/maTable.css'); ?>">
 </head>
-<body>
+<body id="bodyForm">
 <nav>
     <div class="nav-wrapper grey darken-4">
         <a href="<?php echo site_url(''); ?>" class="brand-logo center">Legion d'honneur</a>
@@ -36,6 +36,7 @@
 
 <div id="myForm-wrapper" class="row">
     <form id="myFormInscription" class="col s12">
+        <h2 class="titleForm">Inscription</h2>
         <div class="row">
             <div class="input-field col s6">
                 <input id="pseudo" type="text" class="validate">
